@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da vaga</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <th:block th:include="menuUsuario"></th:block>
+    <div class="container" style="padding:20px">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/index">Início</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Detalhes da vaga</li>
+            </ol>
+        </nav>
+        <th:block th:insert="mensagens"></th:block>
+        <div class="card mb-3 mx-auto" style="width: 60rem;">
+            <div class="card-header" style="text-align:center;">
+                <img th:src="@{/imagem/{imagem}(imagem = ${imagem})}" width="auto" height="80px">
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <strong class="card-title fs-5" th:text="${titulo}"></strong>
+                    <small class="card-text text-end" th:text="${'Publicado em ' + data}"></small>
+                </div>
+                <p class="card-text" th:text = ${empresa}></p>
+                <p class="card-text"><i class="bi bi-suitcase-lg-fill"></i>&nbsp<span th:text = ${categoria}></span></p>
+                <p class="card-text"><i class="bi bi-file-text-fill"></i>&nbsp<span th:text = ${descricao}></span></p>
+                <p class="card-text">Para consultas: <a th:href="@{'mailto:' + ${contato}}" class="card-text" th:text="${contato}"></a></p>
+                <p class="d-inline-flex gap-1">
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Candidate-se
+                    </a>
+                </p> <br/><br/>
+                <div class="collapse" id="collapseExample">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" name="nome" id="nome" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail:</label>
+                            <input type="text" class="form-control" name="email" id="email" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Foto:</label>
+                            <input type="file" class="form-control" name="file" id="file" multiple />
+                        </div>
+                        <div class="mb-3">
+                            <label for="linkedin" class="form-label">LinkedIn:</label>
+                            <input type="text" class="form-control" name="linkedin" id="linkedin" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

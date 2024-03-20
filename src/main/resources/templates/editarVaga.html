@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar vaga</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <th:block th:include="menu"></th:block>
+    <div class="container" style="padding:20px">
+        <th:block th:insert="mensagens"></th:block>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/listarVagas">Início</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Editar vaga</li>
+            </ol>
+        </nav>
+        <form method="post" enctype="multipart/form-data" th:object="${vaga}">
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título:</label>
+                <input type="text" class="form-control" name="titulo" id="titulo" th:value="${titulo}"/>
+            </div>
+            <div class="mb-3">
+                <label for="empresa" class="form-label">Empresa:</label>
+                <input type="text" class="form-control" name="empresa" id="empresa" th:value="${empresa}"/>
+            </div>
+            <div class="mb-3">
+                <label for="categoria" class="form-label">Categoría:</label>
+                <select class="form-select" name="categoria" id="categoria">
+                    <option th:each="opcion : ${categoriasList}" th:value="${opcion}" th:text="${opcion}" th:selected="${opcion == categoria}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição:</label>
+                <textarea class="form-control" name="descricao" id="descricao" th:text="${descricao}"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="contato" class="form-label">Contato:</label>
+                <input type="text" class="form-control" name="contato" id="contato" th:value="${contato}"/>
+            </div>
+            <div class="mb-3">
+                <label for="file" class="form-label">Imagem:</label>
+                <input type="file" class="form-control" name="file" id="file" multiple/>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status:</label>
+                <select class="form-select" name="status" id="status">
+                    <option th:each="opcion : ${estadosList}" th:value="${opcion}" th:text="${opcion}" th:selected="${opcion == status}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Editar</button>
+        </form>
+    </div>
+</body>
+</html>

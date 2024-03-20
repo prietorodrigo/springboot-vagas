@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <th:block th:include="menuUsuario"></th:block>
+    <div class="container" style="padding:20px">
+        Pesquisar por categoría:
+        <div class="container col-5 list-group list-group-horizontal" style="margin:0px">
+            <a href="/categoriaUs/Tempo integral" class="list-group-item list-group-item-action">Tempo integral</a>
+            <a href="/categoriaUs/Meio período" class="list-group-item list-group-item-action">Meio período</a>
+            <a href="/categoriaUs/Freelancer" class="list-group-item list-group-item-action">Freelancer</a>
+        </div> <br />
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid" style="padding:0px">
+                <form method="post" action="pesquisarUs" class="d-flex">
+                    <input class="form-control me-2" type="text" name="texto" placeholder="Pesquisar por empresa" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </nav><br/>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col" th:each="vaga : ${vagas}">
+                <div class="card h-100">
+                    <div class="card-header" width="100%" height="180" style="text-align:center;">
+                        <img th:src="@{/imagem/{imagem}(imagem = ${vaga.imagem})}" width="auto" height="50px"/>
+                    </div>
+                    <div class="card-body">
+                        <a th:href="@{/vermaisVaga/{id} (id=${vaga.id})}"><h5 class="card-title" th:text = ${vaga.titulo}></h5></a>
+                        <p class="card-text" th:text = ${vaga.empresa}></p>
+                        <p class="card-text" th:text = ${vaga.categoria}></p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary" th:text="${'Publicado em ' + vaga.data}"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

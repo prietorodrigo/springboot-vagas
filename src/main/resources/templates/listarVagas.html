@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vagas</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <th:block th:include="menu"></th:block>
+    <div class="container" style="padding:20px">
+        Pesquisar por categoría:
+        <div class="container col-5 list-group list-group-horizontal" style="margin:0px">
+            <a href="/categoria/Tempo integral" class="list-group-item list-group-item-action">Tempo integral</a>
+            <a href="/categoria/Meio período" class="list-group-item list-group-item-action">Meio período</a>
+            <a href="/categoria/Freelancer" class="list-group-item list-group-item-action">Freelancer</a>
+        </div> <br />
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid" style="padding:0px">
+                <form method="post" action="pesquisar" class="d-flex">
+                    <input class="form-control me-2" type="text" name="texto" placeholder="Pesquisar por empresa" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </nav>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Título</th>
+                    <th>Empresa</th>
+                    <th>Categoría</th>
+                    <th>Status</th>
+                    <th colspan="4">Ações</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr th:each="vaga : ${vagas}">
+                    <th th:text = ${vaga.id}></th>
+                    <td th:text = ${vaga.data}></td>
+                    <td th:text = ${vaga.titulo}></td>
+                    <td th:text = ${vaga.empresa}></td>
+                    <td th:text = ${vaga.categoria}></td>
+                    <td th:text = ${vaga.status}></td>
+                    <td><a th:href="@{/editarVaga/{id} (id=${vaga.id})}"><i class="bi bi-pencil-square"></i></a></td>
+                    <td><a th:href="@{/excluirVaga/{id} (id=${vaga.id})}" onclick="return confirm('Tem certeza que deseja excluir esta vaga?');"><i class="bi bi-trash"></i></a></td>
+                    <td><a th:href="@{/vermaisVaga/{id} (id=${vaga.id})}"><i class="bi bi-zoom-in"></i></a></td>
+                    <td><a th:href="@{/listarInscricoes/{id} (id=${vaga.id})}"><i class="bi bi-card-checklist"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
