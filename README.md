@@ -7,6 +7,7 @@ O sistema deve conter uma boa interface, tanto para quem anuncia, quanto para qu
 Os usuários do sistema são Administrador e Usuário comum.
 
 Atribuições do Administrador:
+
 1 - Logado, cria e desabilita (ativa ou desativa) ofertas de vagas e visualiza os inscritos.
 
 Atribuições do Usuário Comum - Sem logar
@@ -20,6 +21,7 @@ Atribuições do Usuário Comum - Sem logar
 Observações:
 
 Categorias de vagas:
+
 Tempo Integral, Meio período ou Freelancer.
 
 Essas categorias podem ou não estarem cadastradas no banco de dados.
